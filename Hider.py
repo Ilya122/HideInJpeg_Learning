@@ -62,7 +62,7 @@ class MessageHider:
 
 
 hider = MessageHider(
-    'C:\\Users\\ASUS\\AppData\\Local\\Temp\\PY\\HideInJpeg\\cat')
+    'cat')
 
 hider.HideBase64('eval(\'alert(\"hello world\")\')')
 print(hider.Show())
